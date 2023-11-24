@@ -46,9 +46,8 @@ public static class Program
         
         var me = await botClient.GetMeAsync(cts.Token);
         Console.WriteLine($"Start listening for @{me.Username}");
-        Console.ReadLine();
         
-        cts.Cancel();
+        await Task.Delay(Timeout.Infinite, cts.Token);
     }
     
     private static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken ct)
