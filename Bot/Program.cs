@@ -66,7 +66,9 @@ public static class Program
             solverCts.CancelAfter(MaxWorkDurationMs);
             var result = await Solver.Solve(players, rounds, prefer4, solverCts.Token);
 
-            await botClient.SendTextMessageAsync(chatId, ResultMessage(result, rounds), cancellationToken: ct);
+            await botClient.SendTextMessageAsync(
+                chatId, ResultMessage(result, rounds),
+                replyToMessageId: message.MessageId, cancellationToken: ct);
         }
         catch (ArgumentException ex)
         {
@@ -75,7 +77,9 @@ public static class Program
         }
         catch (OperationCanceledException)
         {
-            await botClient.SendTextMessageAsync(chatId, $"Error: No solution found after {MaxWorkDurationMs}ms", cancellationToken: ct);
+            await botClient.SendTextMessageAsync(
+                chatId, $"Error: No solution found after {MaxWorkDurationMs}ms",
+                replyToMessageId: message.MessageId, cancellationToken: ct);
         }
     }
 
