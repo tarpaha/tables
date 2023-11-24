@@ -1,8 +1,6 @@
-﻿using System.Text;
-using Solver.Result;
+﻿namespace Bot;
 
-namespace Bot;
-
+using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -11,6 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 using Args;
 using Solver;
+using Solver.Result;
 
 public static class Program
 {
