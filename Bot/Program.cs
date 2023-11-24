@@ -61,10 +61,6 @@ public static class Program
         {
             var args = messageText.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var (players, rounds, prefer4) = Parser.Parse(args);
-            await botClient.SendTextMessageAsync(
-                chatId,
-                $"Solving with parameters:\nplayers = {players}\nrounds = {rounds}\nprefer4 = {prefer4}\n...",
-                cancellationToken: ct);
             
             using var solverCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
             solverCts.CancelAfter(MaxWorkDurationMs);
