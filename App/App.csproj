@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Args\Args.csproj" />
     <ProjectReference Include="..\Solver\Solver.csproj" />
   </ItemGroup>
 
