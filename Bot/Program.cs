@@ -29,7 +29,14 @@ public static class Program
         var botClient = new TelegramBotClient(botToken);
         
         using var cts = new CancellationTokenSource();
-        ReceiverOptions receiverOptions = new () { AllowedUpdates = Array.Empty<UpdateType>() };
+        ReceiverOptions receiverOptions = new()
+        {
+            AllowedUpdates = new[]
+            {
+                UpdateType.Message,
+                UpdateType.EditedMessage
+            }
+        };
         botClient.StartReceiving(
             updateHandler: HandleUpdateAsync,
             pollingErrorHandler: HandlePollingErrorAsync,
@@ -46,9 +53,8 @@ public static class Program
     
     private static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken ct)
     {
-        if (update.Message is not { } message)
-            return;
-        if (message.Text is not { } messageText)
+        var message = update.Message ?? update.EditedMessage;
+        if (message?.Text is not { } messageText)
             return;
 
         var chatId = message.Chat.Id;
